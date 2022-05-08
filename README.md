@@ -28,12 +28,15 @@ Adapun langkah-langkah yang dilakukan sebagai berikut:
     ├── public/
     │   └── index.php
     ├── src/
-    │   ├── controllers
+    │   ├── controllers/
+    │   │   ├── CourseController.php
+    │   │   └── ModuleController.php
+    │   ├── helpers/
+    │   │   └── Connection.php
     │   └── models/
     │       ├── Course.php
     │       └── Module.php
     ├── composer.json
-    ├── connection.php
     └── README.md
    ```
 
