@@ -6,7 +6,7 @@ class Course
 {
   private $id, $title, $category, $description, $modules;
 
-  public function __construct($id, $title, $category, $description, $modules)
+  public function __construct($id, $title, $category = '', $description = '', $modules = [])
   {
     $this->id = $id;
     $this->title = $title;
