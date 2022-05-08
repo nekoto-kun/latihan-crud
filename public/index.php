@@ -1,4 +1,11 @@
-<?php require '../vendor/autoload.php'; ?>
+<?php
+require '../vendor/autoload.php';
+
+use App\Controllers\CourseController;
+
+$courses = CourseController::getAllCourses();
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -63,6 +70,11 @@
         <div class="col-lg-6 col-md-8 mx-auto">
           <h1 class="fw-light">Online Courses</h1>
           <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+          <ol>
+            <?php foreach ($courses as $course) : ?>
+              <li><?= $course->getTitle() ?></li>
+            <?php endforeach ?>
+          </ol>
           <p>
             <a href="#" class="btn btn-primary my-2">Main call to action</a>
             <a href="#" class="btn btn-secondary my-2">Secondary action</a>
