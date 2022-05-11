@@ -94,6 +94,7 @@ $courses = CourseController::getAllCourses();
                     <div class="btn-group">
                       <a href="view.php?id=<?= $course['id'] ?>" class="btn btn-sm btn-outline-secondary">View</a>
                       <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmDelete" onclick="setIdToDelete(<?= $course['id'] ?>)">Delete</button>
                     </div>
                     <small class="text-muted">9 mins</small>
                   </div>
@@ -124,7 +125,7 @@ $courses = CourseController::getAllCourses();
           <h5 class="modal-title" id="addNewCourse">Add new course</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form action="process.php" method="post">
+        <form action="processCourse.php" method="post">
           <div class="modal-body">
             <div class="form-floating mb-3">
               <input type="text" class="form-control" id="courseTitle" placeholder="Course title" name="title" required>
@@ -151,13 +152,41 @@ $courses = CourseController::getAllCourses();
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             <button type="submit" class="btn btn-primary">Add course</button>
           </div>
+        </form>
       </div>
-      </form>
     </div>
   </div>
+
+  <!-- Delete confirmation Modal -->
+  <div class="modal fade" id="confirmDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmDeleteLabel">Delete confirmation</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete this course?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <form action="processCourse.php" method="post">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="id" id="courseIdToBeDeleted">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+  <script>
+    function setIdToDelete(id) {
+      document.getElementById('courseIdToBeDeleted').setAttribute('value', id)
+    }
+  </script>
 </body>
 
 </html>
