@@ -71,7 +71,7 @@ $courses = CourseController::getAllCourses();
           <h1 class="fw-light">Online Courses</h1>
           <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
           <p>
-            <a href="#" class="btn btn-primary my-2">Add new course</a>
+            <button type="button" class="btn btn-primary my-2" data-bs-toggle="modal" data-bs-target="#addnew">Add new course</button>
             <a href="#" class="btn btn-secondary my-2">Secondary action</a>
           </p>
         </div>
@@ -115,6 +115,47 @@ $courses = CourseController::getAllCourses();
       <p class="mb-0">&copy; <?= date('Y') ?> STMIK LIKMI</p>
     </div>
   </footer>
+
+  <!-- Add new course modal -->
+  <div class="modal fade" id="addnew" tabindex="-1" aria-labelledby="addNewCourse" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addNewCourse">Add new course</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="process.php" method="post">
+          <div class="modal-body">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="courseTitle" placeholder="Course title" name="title" required>
+              <label for="courseTitle" class="form-label">Course title</label>
+            </div>
+            <div class="mb-3">
+              <label for="courseDescription" class="form-label">Description</label>
+              <textarea class="form-control" id="courseDescription" rows="3" name="description"></textarea>
+            </div>
+            <hr>
+            <div class="mb-3">
+              <label for="courseCategory" class="form-label">Category</label>
+              <select class="form-select" aria-label="Category" id="courseCategory" name="category" required>
+                <option value="" selected>Choose a category</option>
+                <option>Math</option>
+                <option>Linguistic</option>
+                <option>Economy</option>
+                <option>Tech</option>
+              </select>
+            </div>
+            <div class="mb-3" id="specific"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Add course</button>
+          </div>
+      </div>
+      </form>
+    </div>
+  </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
