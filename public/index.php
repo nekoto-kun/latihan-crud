@@ -49,7 +49,7 @@ $courses = CourseController::getAllCourses();
     </div>
     <div class="navbar navbar-dark bg-dark shadow-sm">
       <div class="container">
-        <a href="#" class="navbar-brand d-flex align-items-center">
+        <a href="/" class="navbar-brand d-flex align-items-center">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48" data-name="Layer 1" id="Layer_1" class="me-2" stroke="currentColor" fill="white">
             <path d="M8,1A2,2,0,0,0,6,3V45a2,2,0,0,0,4,0V3A2,2,0,0,0,8,1Z" />
             <path d="M43.55,13.74C38.22,7.18,32.71,7.62,27.84,8c-4.63.37-8.29.66-12.29-4.27A2,2,0,0,0,12,5V22a2,2,0,0,0,.94,1.7,9.09,9.09,0,0,0,4.91,1.46c4,0,7.8-2.62,11.28-5,5.14-3.53,8.49-5.52,11.81-3.45a2,2,0,0,0,2.61-3ZM26.87,16.85C22.22,20,19,22,16,20.78V9.66c4.18,3,8.37,2.63,12.16,2.33,2.54-.2,4.79-.38,7,.31C32.23,13.17,29.46,15.07,26.87,16.85Z" />
@@ -70,13 +70,8 @@ $courses = CourseController::getAllCourses();
         <div class="col-lg-6 col-md-8 mx-auto">
           <h1 class="fw-light">Online Courses</h1>
           <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
-          <ol>
-            <?php foreach ($courses as $course) : ?>
-              <li><?= $course->getTitle() ?></li>
-            <?php endforeach ?>
-          </ol>
           <p>
-            <a href="#" class="btn btn-primary my-2">Main call to action</a>
+            <a href="#" class="btn btn-primary my-2">Add new course</a>
             <a href="#" class="btn btn-secondary my-2">Secondary action</a>
           </p>
         </div>
@@ -87,24 +82,25 @@ $courses = CourseController::getAllCourses();
       <div class="container">
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <?php foreach ($courses as $course) : ?>
+            <div class="col">
+              <div class="card shadow-sm">
+                <img src="https://placeimg.com/640/480/tech" class="cover">
 
-          <div class="col">
-            <div class="card shadow-sm">
-              <img src="https://placeimg.com/640/480/tech" class="cover">
-
-              <div class="card-body">
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                <div class="card-body">
+                  <h5 class="card-title"><?= $course['title'] ?></h5>
+                  <p class="card-text"><?= $course['description'] ?></p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a href="view.php?id=<?= $course['id'] ?>" class="btn btn-sm btn-outline-secondary">View</a>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
                   </div>
-                  <small class="text-muted">9 mins</small>
                 </div>
               </div>
             </div>
-          </div>
-
+          <?php endforeach ?>
         </div>
       </div>
     </div>
