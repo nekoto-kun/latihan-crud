@@ -93,7 +93,7 @@ $courses = CourseController::getAllCourses();
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <a href="view.php?id=<?= $course['id'] ?>" class="btn btn-sm btn-outline-secondary">View</a>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#editCourse" onclick="setCourseToEdit(<?= $course['id'] ?>,'<?= $course['title'] ?>','<?= $course['category'] ?>','<?= $course['description'] ?>')">Edit</button>
                       <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmDelete" onclick="setIdToDelete(<?= $course['id'] ?>)">Delete</button>
                     </div>
                     <small class="text-muted">9 mins</small>
@@ -146,11 +146,51 @@ $courses = CourseController::getAllCourses();
                 <option>Tech</option>
               </select>
             </div>
-            <div class="mb-3" id="specific"></div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             <button type="submit" class="btn btn-primary">Add course</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit course modal -->
+  <div class="modal fade" id="editCourse" tabindex="-1" aria-labelledby="editCourse" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editCourse">Edit course</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="processCourse.php" method="post">
+          <input type="hidden" id="editCourseId" name="id" value="" />
+          <input type="hidden" name="_method" value="PUT" />
+          <div class="modal-body">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="editCourseTitle" placeholder="Course title" name="title" required>
+              <label for="editCourseTitle" class="form-label">Course title</label>
+            </div>
+            <div class="mb-3">
+              <label for="editCourseDescription" class="form-label">Description</label>
+              <textarea class="form-control" id="editCourseDescription" rows="3" name="description"></textarea>
+            </div>
+            <hr>
+            <div class="mb-3">
+              <label for="editCourseCategory" class="form-label">Category</label>
+              <select class="form-select" aria-label="Category" id="editCourseCategory" name="category" required>
+                <option value="" selected>Choose a category</option>
+                <option>Math</option>
+                <option>Linguistic</option>
+                <option>Economy</option>
+                <option>Tech</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Update course</button>
           </div>
         </form>
       </div>
@@ -185,6 +225,19 @@ $courses = CourseController::getAllCourses();
   <script>
     function setIdToDelete(id) {
       document.getElementById('courseIdToBeDeleted').setAttribute('value', id)
+    }
+  </script>
+
+  <script>
+    function setCourseToEdit(id, title, category, description) {
+      document.getElementById('editCourseId').setAttribute('value', id)
+      document.getElementById('editCourseTitle').setAttribute('value', title)
+
+      const cat = document.getElementById('editCourseCategory')
+      const optToSelect = Array.from(cat.options).find(item => item.text === category)
+      optToSelect.selected = true
+
+      document.getElementById('editCourseDescription').innerHTML = description
     }
   </script>
 </body>
