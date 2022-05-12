@@ -56,4 +56,4 @@ Adapun langkah-langkah yang dilakukan sebagai berikut:
    ```
   
 7. Jalankan perintah `composer dump-autoload` setiap kali ada perubahan/penambahan kelas.
-8. Jalankan perintah `php -S 127.0.0.1:3000 -t public` untuk membuka simulasi aplikasi web project ini dengan mengarahkan langsung ke folder public (di sana sudah ada `index.php`). Untuk mengakses melalui browser, masuk ke alamat `127.0.0.1:3000`. (`127.0.0.1` atau `localhost` sama saja).
+8. Jalankan perintah `php -S 127.0.0.1:80 -t public` untuk membuka simulasi aplikasi web project ini dengan mengarahkan langsung ke folder public (di sana sudah ada `index.php`). Untuk mengakses melalui browser, masuk ke alamat `127.0.0.1:80`. (`127.0.0.1` atau `localhost` sama saja). Pastikan juga server MySQL (database) sudah menyala.
